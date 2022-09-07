@@ -101,7 +101,20 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 	private void update(Node node) {
 		int leftNodeHeight = (node.left == null) ? -1: node.left.height;
 		int rightNodeHeight = (node.right == null) ? -1 : node.right.height;
-}
+		
+		//Actualiza la altura de este nodo
+		node.height = 1 + Math.max(leftNodeHeight, rightNodeHeight);
+		
+		//Actualiza el factor de balance
+		node.bf = rightNodeHeight - leftNodeHeight;
+	}
+	
+	//Re-balancea un nodo si su factor de balance es +2 o -2
+	private Node balance(Node node) {
+		
+		//Subarbol izquierdo pesado
+		
+	}
 	
 	
 	@Override
