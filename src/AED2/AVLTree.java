@@ -77,7 +77,33 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 		
 		//Caso base
 		if(node == null) return new Node(value);
+		
+		//Compara el valor actual con el valor del nodo
+		int cpm = value.compareTo(node.value);
+		
+		//Inserta nodo en el subarbol izquierdo
+		if(cpm < 0) {
+			node.left = insert(node.left, value);;
+		
+		//Inbserta nodo en el subarbol derecho
+		}else {
+			node.right = insert(node.left, value);
+		}
+		
+		//Actualiza el factor de balance y los valores de altura
+		update(node);
+		
+		//Re-balancea el arbol
+		return balance(node);
 	}
+	
+	//Actualiza los distintos valores del nodo y balancea 
+	private void update(Node node) {
+		int leftNodeHeight = (node.left == null) ? -1: node.left.height;
+		int rightNodeHeight = (node.right == null) ? -1 : node.right.height;
+}
+	
+	
 	@Override
 	public Iterator<T> iterator() {
 		// TODO Auto-generated method stub
