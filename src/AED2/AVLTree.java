@@ -1,6 +1,7 @@
 package AED2;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 	public class Node {
@@ -90,7 +91,7 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 			node.right = insert(node.left, value);
 		}
 		
-		//Actualiza el factor de balance y los valores de altura
+		//Actualiza el factor de equilibrio y los valores de altura
 		update(node);
 		
 		//Re-balancea el arbol
@@ -105,11 +106,11 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 		//Actualiza la altura de este nodo
 		node.height = 1 + Math.max(leftNodeHeight, rightNodeHeight);
 		
-		//Actualiza el factor de balance
+		//Actualiza el factor de equilibrio
 		node.bf = rightNodeHeight - leftNodeHeight;
 	}
 	
-	//Re-balancea un nodo si su factor de balance es +2 o -2
+	//Re-balancea un nodo si su factor de equilibrio es +2 o -2
 	private Node balance(Node node) {
 		
 		//Subarbol izquierdo pesado
@@ -135,7 +136,7 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 				return rightLeftCase(node);
 			}
 		}
-		//El nodo tiene un factor de balance de 0, +1 o -1, cosa que esta bien
+		//El nodo tiene un factor de equilibrio de 0, +1 o -1, cosa que esta bien
 		return node;
 	}
 	
@@ -153,7 +154,7 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 	}
 	
 	private Node rightLeftCase(Node node) {
-		nodo.right = rightRotation(node.right);
+		node.right = rightRotation(node.right);
 		return rightRightCase(node);
 	}
 	
@@ -165,9 +166,107 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 		update(newParent);
 		return newParent;
 	}
-
 	
+	private Node rightRotation(Node node) {
+		Node newParent = node.left;
+		node.left = newParent.right;
+		newParent.right = node;
+		update(node);
+		update(newParent);
+		return newParent;
+	}
 	
+	//Remueve un valor del arbol si existe
+	public boolean remove(T elem) {
+		 if(elem==null) return false;
+		 
+		 if(contains(root,elem)) {
+			 root = remove(root, elem);
+			 nodeCount--;
+			 return true;
+		 }
+		 return false;
+	}
+	
+	//Remueve valor del arbol AVL
+	private Node remove(Node node, T elem) {
+		if(node == null) return null;
+		
+		int cpm = elem.compareTo(node.value);
+		
+		//Indaga en el subarbol izquierdo, para saber si el valor que buscamos es menor que el actual
+		if(cpm < 0) {
+			node.left = remove(node.left.left, elem);
+			
+		//Indaga en el subarbol derecho, para sbaer si el valor que buscamos es mayor que el actual
+		}else if(cpm > 0) {
+			node.right = remove(node.right, elem);
+			
+		//Encontramos el nodo que queremos eliminar
+		} else {
+			if(node.left == null) {
+				return node.right;
+				
+			}else if(node.right == null) {
+				return node.left;
+				
+			} else {
+				//Elige remover del subarbol izquierdo
+				if(node.left.height > node.right.height) {
+					
+					//Intercambia el valor del sucesor
+					T successorValue = findMax(node.left);
+					node.value = successorValue;
+					
+					//Encuentra el nodo mas grande en el subarbol izquierdo
+					node.left = remove(node.left, successorValue);;
+					
+				} else {
+					
+					//Intercambia el valor del sucesor
+					T successorValue = findMin(node.right);
+					node.value = successorValue;
+					
+					//Va al subarbol derecho y remueve el nodo mas a la izquierda encontrado
+					//y intercambia sus datos. Esto previene que tengamos dos nodos con los
+					//mismos valores
+					node.right = remove(node.right, successorValue);
+				}
+			}
+		}
+		
+		//Actualiza factor de equilibrio y altura.
+		update(node);
+		
+		//Re-balancea el arbol
+		return balance(node);
+	}
+	
+	//Metodo para hallar el nodo mas a la izquierda(es decir, tiene el valor mas chico)
+	private T findMin(Node node) {
+		while(node.left != null)
+			node = node.left;
+		return node.value;
+	}
+	
+	//Metodo para hallar el nodo mas a la dereche(es decir, tiene el valor mas grande)
+	private T findMax(Node node) {
+		while(node.right != null)
+			node = node.right;
+		return node.value;
+	}
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		AVLTree<Integer> tree = new AVLTree<>();
+		int userValue = input.nextInt();
+		tree.insert(userValue);
+		while(opt == 1) {
+			
+		}
+		
+		
+	}
 	@Override
 	public Iterator<T> iterator() {
 		// TODO Auto-generated method stub
