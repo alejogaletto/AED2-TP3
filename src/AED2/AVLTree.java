@@ -113,8 +113,59 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 	private Node balance(Node node) {
 		
 		//Subarbol izquierdo pesado
+		if(node.bf == -2) {
+			//Caso de izquierda-izquierda
+			if(node.left.bf <= 0) {
+				return leftLeftCase(node);
+				
+				//Caso de izquierda-derecha
+			} else {
+				return leftRightCase(node);
+			}
 		
+		// El subarbol derecho necesita balancear
+		}else if(node.bf == +2) {
+			
+			//Caso derecha-derecha
+			if(node.right.bf >= 0) {
+				return rightRightCase(node);
+				
+			//Caso de dercba-izquierda
+			} else {
+				return rightLeftCase(node);
+			}
+		}
+		//El nodo tiene un factor de balance de 0, +1 o -1, cosa que esta bien
+		return node;
 	}
+	
+	private Node leftLeftCase(Node node) {
+		return rightRotation(node);
+	}
+	
+	private Node leftRightCase(Node node) {
+		node.left = leftRotation(node.left);
+		return leftLeftCase(node);
+	}
+	
+	private Node rightRightCase(Node node) {
+		return leftRotation(node);
+	}
+	
+	private Node rightLeftCase(Node node) {
+		nodo.right = rightRotation(node.right);
+		return rightRightCase(node);
+	}
+	
+	private Node leftRotation(Node node) {
+		Node newParent = node.right;
+		node.right = newParent.left;
+		newParent.left = node;
+		update(node);
+		update(newParent);
+		return newParent;
+	}
+
 	
 	
 	@Override
