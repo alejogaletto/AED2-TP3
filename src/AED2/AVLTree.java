@@ -261,8 +261,10 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 		AVLTree<Integer> tree = new AVLTree<>();
 		int userValue = input.nextInt();
 		tree.insert(userValue);
-		while(opt == 1) {
-			
+		while(true) {
+			System.out.println("Oprima [1] insertar un dato");
+			System.out.println("Oprima [2] borrar un dato");
+			System.out.println("Oprima [3] para mostrar todos los datos ordenados con su FE");
 		}
 		
 		
