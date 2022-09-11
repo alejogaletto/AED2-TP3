@@ -1,9 +1,48 @@
-package AED2;
+package Trees;
 
-import java.util.Iterator;
-import java.util.Scanner;
 
-public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+public class AVL <T extends Comparable <T>> implements Iterable <T> {
+	
+	
+	
+}
 	public class Node {
 		// "bf" es factor de balance
 		int bf;
@@ -258,7 +297,7 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		AVLTree<Integer> tree = new AVLTree<>();
+		AVL<Integer> tree = new AVL<>();
 		int userValue = input.nextInt();
 		tree.insert(userValue);
 		while(true) {
@@ -275,4 +314,4 @@ public class AVLTree <T extends Comparable <T>> implements Iterable <T> {
 		return null;
 	}
 	
-}
+*/
