@@ -1,6 +1,8 @@
 package Trees;
 
-
+public class AVL extends ABB {
+	
+}
 
 
 

@@ -2,8 +2,10 @@ package Node;
 
 public class Node {
     private int data;
+    private int bf;
+    private int height;
     private Node leftChild;
-    private Node rigthChild;
+    private Node rightChild;
 
     public Node(int data){
         this.data = data;
@@ -16,6 +18,20 @@ public class Node {
         return data;
     }
 
+    public void setBf(int bf) {
+        this.bf = bf;
+    }
+    public int getBf() {
+        return bf;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getHeight() {
+        return height;
+    }
+
     public void setLeftChild(Node leftChild) {
         this.leftChild = leftChild;
     }
@@ -23,11 +39,11 @@ public class Node {
         return leftChild;
     }
 
-    public void setRigthChild(Node rigthChild) {
-        this.rigthChild = rigthChild;
+    public void setRightChild(Node rigthChild) {
+        this.rightChild = rigthChild;
     }
-    public Node getRigthChild() {
-        return rigthChild;
+    public Node getRightChild() {
+        return rightChild;
     }
 
    
