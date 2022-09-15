@@ -2,26 +2,26 @@ package Trees;
 
 import Node.Node;
 
-public class ABB {
-    public Node root;
+public class ABB<T extends Comparable<T>> {
+    public Node<T> root;
     
 
-    public ABB insert(int data) {
+    public ABB<T> insert(T data) {
         root = insert(data, root);
 
         return this;
     }
 
-    private Node insert(int data, Node node) {
+    protected Node<T> insert(T data, Node<T> node) {
         if (node == null) {
-            return new Node(data);
+            return new Node<>(data);
         }
-        if (node.compareTo(data) > 0) {
-            //izquierda
+        if (data.compareTo(node.getData()) < 0) {
+
             node.setLeftChild(insert(data, node.getLeftChild()));
             
-        }else if(node.compareTo(data) < 0){
-            //derecha
+        }else if(data.compareTo(node.getData())> 0){
+            
             node.setRightChild(insert(data, node.getRightChild()));
 
 
@@ -30,7 +30,7 @@ public class ABB {
         return node;
     }
 
-    public boolean delete(int data) {
+    public boolean delete(T data) {
         if (isEmpty()) {
             return false;
         }
@@ -39,24 +39,24 @@ public class ABB {
         
     }
 
-    private Node delete(int data, Node node) {
+    protected Node<T> delete(T data, Node<T> node) {
         if (node == null) {
             return null;
         }
-        if (node.compareTo(data) > 0) {
-            //izquierda
+        if (data.compareTo(node.getData()) < 0) {
+            
             node.setLeftChild(delete(data, node.getLeftChild()));
-        } else if (node.compareTo(data) < 0) {
-            //derecha
+        } else if (data.compareTo(node.getData()) > 0) {
+            
             node.setRightChild(delete(data, node.getRightChild()));
         } else {
-            // un hijo
+
             if (node.getLeftChild() == null) {
                 return node.getRightChild();
             } else if (node.getRightChild() == null) {
                 return node.getLeftChild();
             }
-            //dos hijos
+
 
             node.setData(getMax(node.getLeftChild()));
             node.setLeftChild(delete(node.getData(), node.getLeftChild()));
@@ -65,16 +65,30 @@ public class ABB {
     }
 
     
-    public int getMax() {
+    public T getMax() {
         if (isEmpty()) {
-            return 0;
+            return null;
         }
         return getMax(root);
     }
 
-    private int getMax(Node node) {
+    protected T getMax(Node<T> node) {
         if (node.getRightChild() != null) {
             return getMax(node.getRightChild());
+        }
+        return node.getData();
+    }
+
+    public T getMin() {
+        if (isEmpty()) {
+            return null;
+        }
+        return getMin(root);
+    }   
+
+    protected T getMin(Node<T> node) {
+        if (node.getLeftChild() != null) {
+            return getMin(node.getLeftChild());
         }
         return node.getData();
     }
@@ -85,16 +99,16 @@ public class ABB {
     }
 
     public void traversal() {
-        InOrder(root);
+        inorder(root);
     }
 
-    private void InOrder(Node node) {
+    protected void inorder(Node<T> node) {
         if (node == null) {
             return;
         }
-        InOrder(node.getLeftChild());
+        inorder(node.getLeftChild());
         System.out.println(node.getData());
-        InOrder(node.getRightChild());
-    }
+        inorder(node.getRightChild());
+    } 
    
 }

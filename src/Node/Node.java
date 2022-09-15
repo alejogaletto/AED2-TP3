@@ -1,20 +1,20 @@
 package Node;
 
-public class Node {
-    private int data;
+public class Node<T extends Comparable<T>> {
+    private T data;
     private int bf;
-    private int height;
-    private Node leftChild;
-    private Node rightChild;
+    private int height = 1;
+    public Node<T> leftChild;
+    private Node<T> rightChild;
 
-    public Node(int data){
+    public Node(T data){
         this.data = data;
     }
 
-    public void setData(int data) {
+    public void setData(T data) {
         this.data = data;
     }
-    public int getData() {
+    public T getData() {
         return data;
     }
 
@@ -32,29 +32,20 @@ public class Node {
         return height;
     }
 
-    public void setLeftChild(Node leftChild) {
+    public void setLeftChild(Node<T> leftChild) {
         this.leftChild = leftChild;
     }
-    public Node getLeftChild() {
+    public Node<T> getLeftChild() {
         return leftChild;
     }
 
-    public void setRightChild(Node rigthChild) {
+    public void setRightChild(Node<T> rigthChild) {
         this.rightChild = rigthChild;
     }
-    public Node getRightChild() {
+    public Node<T> getRightChild() {
         return rightChild;
     }
 
    
-    public int compareTo(int o) {
-        if (this.getData()>o) {
-            return 1;
-        } else if (this.getData()<o) {
-            return -1;
-        } else {
-            return 0;
-        }
-    }
 
 }

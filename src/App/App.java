@@ -1,13 +1,24 @@
 package App;
 
 import Trees.ABB;
+import Trees.AVL;
 
 public class App {
 	public static void main(String[] args) {
-		ABB tree = new ABB();
+		AVL<Integer> tree = new AVL<>();
+		
 
-		tree.insert(2);
-		tree.insert(1);
+	
+
+		tree.insertAVL(1);
+		tree.insertAVL(2);
+		tree.insertAVL(-1);
+		tree.insertAVL(3);
+		tree.insertAVL(1);
+	
+
+		
+
 		tree.traversal();
 		
 	}
