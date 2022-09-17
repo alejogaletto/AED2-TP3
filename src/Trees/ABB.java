@@ -35,8 +35,7 @@ public class ABB<T extends Comparable<T>> {
             return false;
         }
         root = delete(data, root);
-        return true;
-        
+        return true;   
     }
 
     protected Node<T> delete(T data, Node<T> node) {

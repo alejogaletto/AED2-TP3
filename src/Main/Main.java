@@ -12,29 +12,34 @@ public class Main{
         Scanner input = new Scanner(System.in);
         AVL tree = new AVL<>();
         int data;
+
+
         while(true){
             System.out.println("--------------------------------------MENU--------------------------------------");
             System.out.println("1. Insertar un dato");
             System.out.println("2. Borrar un dato");
             System.out.println("3. Mostrar todos los datos ordenados con su FE");
-            int option = input.nextInt();
+            System.out.println("Para salir presione cualquier tecla");
+            String option = input.next();
             switch(option){
-                case 1:
+                case "1":
                     System.out.println("Ingresar valor que quieres insertar en el árbol");
                     data = input.nextInt();
-                    tree.insertAVL(data);
-                    System.out.println("Valor insertado");
+                    tree.insert(data);
                     break;
-                case 2:
+                case "2":
                     System.out.println("Ingrese valor que desea borrar del árbol");
                     data = input.nextInt();
-                    tree.delete(data);
-                    System.out.println("Valor borrado");
+                    if (!tree.delete(data)) {
+                        System.out.println("La lista esta vacia");
+                    }
                     break;
-                case 3:
-                    System.out.println("Valores ordenados:");
-                    tree.traversal();
+                case "3":
+                    System.out.println("Valores ordenados (inorden):");
+                    tree.traversalAVL();
                     break;
+                default:
+                    return;
             } 
         }
     }
